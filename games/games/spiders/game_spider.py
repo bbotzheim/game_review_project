@@ -83,7 +83,6 @@ class GameSpider(Spider):
                 review_text = review.xpath('.//div[@class="review_body"]//text()').extract()
                 review_text = " ".join([text.strip() for text in review_text])
 
-
             item = ReviewItem()
             item['title'] = title #meta syntax?
             item['platform'] = platform
