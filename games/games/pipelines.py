@@ -29,10 +29,16 @@ class GamesPipeline(object):
         for name in self.fileNamesCsv:
             self.exporters[name] = CsvItemExporter(self.files[name])
             if name == 'GameItem':
-                self.exporters[name].fields_to_export = ['url','title','platform','genres','release_date','ESRB_rating','summary','average_user_score','metascore','developer','publisher']
+                self.exporters[name].fields_to_export = [
+                    'url', 'title', 'platform', 'genres', 'release_date', 'ESRB_rating',
+                    'summary', 'average_user_score', 'metascore', 'developer', 'publisher'
+                ]
                 self.exporters[name].start_exporting()
             if name == 'ReviewItem':
-                self.exporters[name].fields_to_export = ['title','platform','username','score','date','review_text','critic_flag']
+                self.exporters[name].fields_to_export = [
+                    'title', 'platform', 'username', 'score',
+                    'date', 'review_text', 'critic_flag'
+                ]
                 self.exporters[name].start_exporting()
 
     def spider_closed(self, spider):
