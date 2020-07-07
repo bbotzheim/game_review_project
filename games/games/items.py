@@ -7,6 +7,7 @@
 
 import scrapy
 
+
 class GameItem(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
@@ -19,6 +20,7 @@ class GameItem(scrapy.Item):
     metascore = scrapy.Field()
     developer = scrapy.Field()
     publisher = scrapy.Field()
+
 
 class ReviewItem(scrapy.Item):
     title = scrapy.Field()
