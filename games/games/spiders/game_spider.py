@@ -11,14 +11,14 @@ class GameSpider(Spider):
         page_urls = [f'https://www.metacritic.com/browse/games/score/metascore/all/all/filtered?sort=desc&page={i}' for i in range(0, num_pages)]
 
         for url in page_urls:
-            yield Request(url=url, callback=self.parse_game_urls)
+            yield Request(url=url, callback=self.parse_game_urls, dont_filter = True)
 
     def parse_game_urls(self, response):
         game_urls = response.xpath('//*[@id="main_content"]//table[@class="clamp-list"]//td[@class="clamp-summary-wrap"]//a[@class="title"]/@href').extract()
         game_urls = ['https://www.metacritic.com' + url for url in game_urls]
 
         for url in game_urls:
-            yield Request(url=url, callback=self.parse_game_page, meta={'url':url})
+            yield Request(url=url, callback=self.parse_game_page, meta={'url':url}, dont_filter = True)
 
     def parse_game_page(self, response):
         url = response.meta['url']
@@ -61,8 +61,8 @@ class GameSpider(Spider):
         critic_review_page = response.xpath('//*[@id="main_content"]//li[@class="nav nav_critic_reviews"]//@href').extract_first()
         critic_review_page = 'https://www.metacritic.com' + critic_review_page
 
-        yield Request(url=user_review_page, callback=self.parse_user_urls, meta={'title':title, 'platform':platform, 'url':url})
-        yield Request(url=critic_review_page, callback=self.parse_critic_urls, meta={'title':title, 'platform':platform, 'url':url})
+        yield Request(url=user_review_page, callback=self.parse_user_urls, meta={'title':title, 'platform':platform, 'url':url}, dont_filter = True)
+        yield Request(url=critic_review_page, callback=self.parse_critic_urls, meta={'title':title, 'platform':platform, 'url':url}, dont_filter = True)
         print('Finished Scraping ' + title )
 
     def parse_user_urls(self, response):
@@ -75,7 +75,7 @@ class GameSpider(Spider):
             user_urls = [response.meta['url'] + '/user-reviews?page=0']
 
         for url in user_urls:
-            yield Request(url=url, callback=self.parse_user_reviews, meta={'title':title, 'platform':platform})
+            yield Request(url=url, callback=self.parse_user_reviews, meta={'title':title, 'platform':platform}, dont_filter = True)
 
     def parse_user_reviews(self, response):
         title = response.meta['title']
@@ -117,7 +117,7 @@ class GameSpider(Spider):
             critic_urls = [response.meta['url'] + '/critic-reviews?page=0']
 
         for url in critic_urls:
-            yield Request(url=url, callback=self.parse_critic_reviews, meta={'title':title, 'platform':platform})
+            yield Request(url=url, callback=self.parse_critic_reviews, meta={'title':title, 'platform':platform}, dont_filter = True)
 
     def parse_critic_reviews(self, response):
         title = response.meta['title']

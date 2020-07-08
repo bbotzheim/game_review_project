@@ -66,6 +66,7 @@ DOWNLOAD_DELAY = 2
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'games.pipelines.GamesPipeline': 300,
+    'games.pipelines.ReviewsPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
