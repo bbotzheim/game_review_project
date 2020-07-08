@@ -23,6 +23,7 @@ class GameItem(scrapy.Item):
 class ReviewItem(scrapy.Item):
     title = scrapy.Field()
     platform = scrapy.Field()
+    url = scrapy.Field()
     username = scrapy.Field()
     score = scrapy.Field()
     date = scrapy.Field()
