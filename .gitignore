@@ -1,2 +1,13 @@
 games.csv
 game_reviews.csv
+
+developers.csv      
+game_reviews.csv  
+genres.csv     
+publishers.csv
+game_genre_tags.csv  
+games.csv         
+platforms.csv  
+users.csv
+
+doc2vec.model
