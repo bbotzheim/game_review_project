@@ -29,6 +29,9 @@ def create_app():
         platform = request.args.get("platform", "", type=str)
         genres_str = request.args.get("genres", "", type=str)
 
+        if search_game == "":
+            return jsonify(result="", error="No game input :(")
+
         if genres_str == "":
             genre_ids = []
         else:
@@ -44,9 +47,9 @@ def create_app():
 
         if recommended_ids is not None:
             recommended_games = [recommended_ids[gid][0] for gid in recommended_ids]
-            return jsonify(result=recommended_games, found_flag=True)
+            return jsonify(result=recommended_games)
         else:
-            return jsonify(result="")
+            return jsonify(result="", error="Unable to find any matches :(")
 
     return app
 

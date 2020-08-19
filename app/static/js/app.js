@@ -13,7 +13,7 @@ $(document).ready( function() {
             results_ele.empty();
             results_ele.css("display", "block");
             if (data.result === "") {
-                results_ele.text("Unable to find any matches :(");
+                results_ele.text(data.error);
             }
             else {
                 data.result.forEach(function (item, index) {
