@@ -42,7 +42,11 @@ def create_app():
         else:
             platform_id = int(platform)
 
-        recommended_ids = recommender_obj.get_filtered_recommendations(search_game, 
+        game_id = recommender_obj.lookup_game_id(search_game, platform_id)
+        if len(game_id) == 0:
+            return jsonify(result="", error="Unable to match the input name to a game :(")
+
+        recommended_ids = recommender_obj.get_filtered_recommendations(game_id, 
                 platform_id, genre_ids, N_RECOMMENDATIONS)
 
         if recommended_ids is not None:

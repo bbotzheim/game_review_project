@@ -47,9 +47,11 @@ class Recommender(object):
         
     def get_recommendations(self, keyword, n = 100):
         '''Helper method that calls the Doc2Vec model to get recommendations.
-                Input:
-                keyword = Game ID (to build recommendations from)
-                n = # of recommendations to return (default = 100)
+            
+            Args:
+                keyword: A single Game ID or a list of IDs, to build recommendations from.
+                    Must be strings. 
+                n: Number of recommendations to return (default = 100)
         '''
         return self.model.docvecs.most_similar(keyword, topn=n)
 
@@ -153,4 +155,17 @@ class Recommender(object):
         else:
             raise ValueError("id_type must equal 'game', 'platform', or 'genre'. Error may be caused by\
             no corresponding ID for input 'name'.")
+
+
+    def lookup_game_id(self, game_name, platform_id=None):
+
+        game_matches =  self.games_df[self.games_df['title']==game_name]
+        if platform_id is not None:
+            platform_matches = game_matches[game_matches['platform_ID']==platform_id]
+            if len(platform_matches) > 0:
+                game_matches = platform_matches
+
+        # Converted to string for input into get_recommendations
+        return [str(i) for i in game_matches["game_ID"].tolist()]
+            
         
