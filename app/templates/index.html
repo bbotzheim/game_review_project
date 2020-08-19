@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The big ol' video game recommender</title>
+    <link rel="stylesheet" href="/static/css/app.css"/>
+</head>
+<body>
+    <header>
+        <h1>The big ol' video game recommender</h1>
+    </header>
+    <section>
+        <p>
+            Select a platform to search by, and enter genres to filter by.
+            Then enter a game, and hit "recommend" to get a list of recommended related games.
+        </p>
+
+        <div class="app">
+            <div class="platform-select">
+                <label for="platform">Select a platform:</label>
+                <select name="platform" id="platform">
+                    <option value="ps3">Playstation 3</option>
+                    <option value="xbone">Xbox One</option>
+                    <option value="n64">Nintendo 64</option>
+                </select>
+            </div>
+            <div class="genre-select">
+                <label for="genre">Select genres you're interested in</label>
+                <select name="genre" id="genre" multiple>
+                    <option value="action-adventure">Action-Adventure</option>
+                    <option value="mmo">MMO</option>
+                    <option value="platformer">Platformer</option>
+                </select>
+            </div>
+            <div>
+                <label for="game">Enter a game you want recommendations similar to</label>
+                <input name="game" id="game" type="text"/>
+            </div>
+            <button class="submit" type="button">Recommend Me!</button>
+
+            <div class="results">
+
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
