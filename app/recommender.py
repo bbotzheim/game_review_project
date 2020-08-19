@@ -1,13 +1,16 @@
 import gensim
 from gensim.models.doc2vec import Doc2Vec
+import os
+
+import pandas as pd
 
 def initialize_recommender(model_path, table_path):
     doc2vec_model = Doc2Vec.load(model_path+'/doc2vec.model')
 
-    games = pd.read_csv(table_path+'\\games.csv')
-    platforms = pd.read_csv(table_path+'\\platforms.csv')
-    genres = pd.read_csv(table_path+'\\genres.csv')
-    game_genre_tags = pd.read_csv(table_path+'\\game_genre_tags.csv')
+    games = pd.read_csv(os.path.join(table_path, "games.csv"))
+    platforms = pd.read_csv(os.path.join(table_path, "platforms.csv"))
+    genres = pd.read_csv(os.path.join(table_path, "genres.csv"))
+    game_genre_tags = pd.read_csv(os.path.join(table_path, "game_genre_tags.csv"))
 
     return Recommender(doc2vec_model, games, platforms, genres, game_genre_tags)
 
@@ -59,12 +62,15 @@ class Recommender(object):
 
         for game in ranked_results:
             if len(filtered_results) < n:
-                dict_id = game[0]
+                dict_id = int(game[0])
                 dict_game_name = lookup_dict[game[0]]['title']
                 dict_platform_ID = lookup_dict[game[0]]['platform_ID']
                 dict_summary = lookup_dict[game[0]]['summary']
                 dict_url = lookup_dict[game[0]]['url']
-                
+
+                if dict_id not in self.genre_dict:
+                    self.genre_dict[dict_id] = []
+
                 if (platform_ID is None) and (len(genre_IDs) == 0):
                     filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
 
@@ -82,7 +88,7 @@ class Recommender(object):
                         else:
                             filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
 
-                elif (dict_platform_ID == platform_ID) and (set(genre_IDs) & set(self.genre_dict[dict_id]) > 0):
+                elif (dict_platform_ID == platform_ID) and (len(set(genre_IDs) & set(self.genre_dict[dict_id])) > 0):
                         if dict_id in filtered_results:
                             continue
                         else:  
@@ -91,7 +97,7 @@ class Recommender(object):
         if len(filtered_results) > 0:
             return filtered_results
         else:
-            return 
+            return None
         
     def lookup_value(self, id_number, id_type):
         '''Method that looks up the value of the ID number for a game, platform, or genre.
