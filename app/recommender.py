@@ -28,6 +28,16 @@ class Recommender(object):
         for i in self.game_genre_tags_df['game_ID'].unique():
             self.genre_dict[i] = [self.game_genre_tags_df['genre_ID'][j] for j in self.game_genre_tags_df[self.game_genre_tags_df['game_ID']==i].index]
 
+    def get_platform_list(self):
+        '''Gets a list of dicts containing platform name and id from the platform data table'''
+        platform_list = [{"name": t.platform, "id": t.platform_ID} for t in self.platform_df.itertuples()]
+        return platform_list
+
+    def get_genre_list(self):
+        '''Gets a list of dicts containing genre name and id from the genre data table'''
+        genre_list = [{"name": t.genre_name, "id": t.genre_ID} for t in self.genre_df.itertuples()]
+        return genre_list
+
     def create_lookup(self):
         '''Helper method that creates a lookup dictionary (from the games table) to easily filter by game ID.'''
         self.lookup_df = self.games_df[['game_ID', 'title', 'platform_ID', 'summary', 'url']]
