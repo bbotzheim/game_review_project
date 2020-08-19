@@ -20,17 +20,17 @@
             <div class="platform-select">
                 <label for="platform">Select a platform:</label>
                 <select name="platform" id="platform">
-                    <option value="ps3">Playstation 3</option>
-                    <option value="xbone">Xbox One</option>
-                    <option value="n64">Nintendo 64</option>
+                    {% for platform in platforms %}
+                    <option value={{platform.id}}>{{platform.name}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="genre-select">
                 <label for="genre">Select genres you're interested in</label>
                 <select name="genre" id="genre" multiple>
-                    <option value="action-adventure">Action-Adventure</option>
-                    <option value="mmo">MMO</option>
-                    <option value="platformer">Platformer</option>
+                    {% for genre in genres %}
+                    <option value={{genre.id}}>{{genre.name}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div>

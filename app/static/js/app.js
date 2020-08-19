@@ -12,18 +12,20 @@ $(document).ready( function() {
         $.getJSON("/api/_recommend-games", request, function(data) {
             results_ele.empty();
             results_ele.css("display", "block");
-            data.result.forEach(function (item, index) {
-                // var result_ele = document.createElement("div");
-                // result_ele.text(item);
-                // results_ele.append(result_ele)
+            if (data.result === "") {
+                results_ele.text("Unable to find any matches :(");
+            }
+            else {
+                data.result.forEach(function (item, index) {
+                    // var result_ele = document.createElement("div");
+                    // result_ele.text(item);
+                    // results_ele.append(result_ele)
 
-                var res = results_ele.append("<p>", item);
-                // res.text(item);
+                    var res = results_ele.append("<p>", item);
+                    // res.text(item);
 
-            });
+                });
+            }
         });
-
-
     });
-
 });
