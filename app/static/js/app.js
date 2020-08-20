@@ -9,7 +9,7 @@ $(document).ready( function() {
         var request = {game: game, genres: genres.join(","), platform: platform};
         var results_ele = $(".app .results");
         console.log(request);
-        $.getJSON("/api/_recommend-games", request, function(data) {
+        $.getJSON("api/_recommend-games", request, function(data) {
             results_ele.empty();
             results_ele.css("display", "block");
             if (data.result === "") {
