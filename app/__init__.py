@@ -50,10 +50,8 @@ def create_app():
                 platform_id, genre_ids, N_RECOMMENDATIONS)
 
         if recommended_ids is not None:
-            recommended_games = [recommended_ids[gid]["title"] for gid in recommended_ids]
             recommended_items = [recommended_ids[gid] for gid in recommended_ids]
             return jsonify(result=render_template("recommendations.html", recommendations=recommended_items))
-            #return jsonify(result=recommended_games)
         else:
             return jsonify(result="", error="Unable to find any matches :(")
 
