@@ -20,6 +20,7 @@
         <div class="app">
             <div class="platform-select">
                 <label for="platform">Select a platform:</label>
+                <br/>
                 <select name="platform" id="platform">
                     {% for platform in platforms %}
                     <option value={{platform.id}}>{{platform.name}} ({{platform.num_games}} games)</option>
@@ -28,6 +29,7 @@
             </div>
             <div class="genre-select">
                 <label for="genre">Select genres you're interested in</label>
+                <br/>
                 <select name="genre" id="genre" multiple>
                     {% for genre in genres %}
                     <option value={{genre.id}}>{{genre.name}} 
@@ -38,6 +40,7 @@
             </div>
             <div>
                 <label for="game">Enter a game you want recommendations similar to</label>
+                <br/>
                 <input name="game" id="game" type="text"/>
             </div>
             <button class="submit" type="button">Recommend Me!</button>
