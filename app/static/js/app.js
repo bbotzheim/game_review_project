@@ -14,7 +14,7 @@ function set_game_name_autocomplete() {
         if (!val) { return false;}
         currentFocus = -1;
 
-        $.getJSON("/api/_complete-games", {game_partial: val}, function(data) {
+        $.getJSON("api/_complete-games", {game_partial: val}, function(data) {
         /*create a DIV element that will contain the items (values):*/
             arr = data.result;
         });
