@@ -182,7 +182,7 @@ class Recommender(object):
             no corresponding ID for input 'name'.")
 
 
-    def lookup_game_id(self, game_name, platform_id=None):,m
+    def lookup_game_id(self, game_name, platform_id=None):
         game_matches =  self.games_df[self.games_df['title']==game_name]
         if platform_id is not None:
             platform_matches = game_matches[game_matches['platform_ID']==platform_id]
