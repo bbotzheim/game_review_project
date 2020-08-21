@@ -120,15 +120,7 @@ $(document).ready( function() {
                 results_ele.text(data.error);
             }
             else {
-                data.result.forEach(function (item, index) {
-                    // var result_ele = document.createElement("div");
-                    // result_ele.text(item);
-                    // results_ele.append(result_ele)
-
-                    var res = results_ele.append("<p>", item);
-                    // res.text(item);
-
-                });
+                results_ele.html(data.result);
             }
         });
     });

@@ -104,32 +104,33 @@ class Recommender(object):
                 dict_platform_ID = lookup_dict[game[0]]['platform_ID']
                 dict_summary = lookup_dict[game[0]]['summary']
                 dict_url = lookup_dict[game[0]]['url']
+                print(lookup_dict[game[0]])
 
                 if dict_id not in self.genre_dict:
                     self.genre_dict[dict_id] = []
 
                 if (platform_ID is None) and (len(genre_IDs) == 0):
-                    filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
+                    filtered_results[dict_id] = lookup_dict[game[0]]
 
                 elif len(genre_IDs) == 0:
                     if (dict_platform_ID == platform_ID):
                         if dict_id in filtered_results:
                             continue
                         else:
-                            filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
+                            filtered_results[dict_id] = lookup_dict[game[0]]
 
                 elif platform_ID is None:
                     if set(genre_IDs) & set(self.genre_dict[dict_id]) > 0:
                         if dict_id in filtered_results:
                             continue
                         else:
-                            filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
+                            filtered_results[dict_id] = lookup_dict[game[0]]
 
                 elif (dict_platform_ID == platform_ID) and (len(set(genre_IDs) & set(self.genre_dict[dict_id])) > 0):
                         if dict_id in filtered_results:
                             continue
                         else:  
-                            filtered_results[dict_id] = (dict_game_name, dict_summary, dict_url)
+                            filtered_results[dict_id] = lookup_dict[game[0]]
 
         if len(filtered_results) > 0:
             return filtered_results

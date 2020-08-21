@@ -1,0 +1,8 @@
+<div class="recommendation-results">
+    {% for recommendation in recommendations %}
+        <div class="recommendation-item">
+            <h2>{{ recommendation["title"] }}</h2>
+            <p>{{ recommendation["summary"] }}</p>
+        </div>
+    {% endfor %}
+</div>

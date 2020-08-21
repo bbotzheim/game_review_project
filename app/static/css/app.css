@@ -37,11 +37,24 @@ h1 {
 
 .app .results {
     border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border-color: lightcoral;
+    border-width: 2px;
+    border-radius: 6px;
     margin: 0.5em;
     min-height: 1em;
     display: none;
+}
+
+.app .results .recommendation-item {
+    margin: 0.5em; 
+    font-size: 11pt;
+    color: #101010;
+    font-weight: normal;
+}
+.app .results .recommendation-item h2 {
+    font-size: 14pt;
+    color: black;
+    font-weight: 500;
 }
 
 select {
