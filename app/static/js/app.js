@@ -18,10 +18,6 @@ function set_game_name_autocomplete() {
         /*create a DIV element that will contain the items (values):*/
             arr = data.result;
         });
-        console.log("Got autocompletes!");
-        console.log(arr);
-        console.log("What is this?");
-        console.log(this);
         a = document.createElement("div");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
