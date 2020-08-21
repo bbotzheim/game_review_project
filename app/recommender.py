@@ -104,7 +104,6 @@ class Recommender(object):
                 dict_platform_ID = lookup_dict[game[0]]['platform_ID']
                 dict_summary = lookup_dict[game[0]]['summary']
                 dict_url = lookup_dict[game[0]]['url']
-                print(lookup_dict[game[0]])
 
                 if dict_id not in self.genre_dict:
                     self.genre_dict[dict_id] = []
@@ -183,8 +182,7 @@ class Recommender(object):
             no corresponding ID for input 'name'.")
 
 
-    def lookup_game_id(self, game_name, platform_id=None):
-
+    def lookup_game_id(self, game_name, platform_id=None):,m
         game_matches =  self.games_df[self.games_df['title']==game_name]
         if platform_id is not None:
             platform_matches = game_matches[game_matches['platform_ID']==platform_id]
