@@ -192,5 +192,12 @@ class Recommender(object):
 
         # Converted to string for input into get_recommendations
         return [str(i) for i in game_matches["game_ID"].tolist()]
+
+    def get_game_completions(self, partial_name):
+        '''Returns a list of games which match the partial name provided'''
+        games_lower = self.games_df["title"].str.lower()
+        start_matches = self.games_df[games_lower.str.match(partial_name.lower())]["title"]
+        matches = sorted(start_matches.unique())
+        return matches
             
         

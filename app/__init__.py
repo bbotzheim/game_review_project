@@ -55,5 +55,12 @@ def create_app():
         else:
             return jsonify(result="", error="Unable to find any matches :(")
 
+    @app.route("/api/_complete-games")
+    def complete_games():
+        partial = request.args.get("game_partial", "", type=str)
+        completions = recommender_obj.get_game_completions(partial)
+        return jsonify(result=completions)
+
     return app
+
 
