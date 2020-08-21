@@ -19,7 +19,7 @@ def create_app():
         platforms = sorted(recommender_obj.get_platform_list(), 
                 key=lambda x: x["name"])
         genres = sorted(recommender_obj.get_genre_list(),
-                key=lambda x: x["name"])
+                key=lambda x: x["num_games"], reverse=True)
         return render_template("index.html", platforms=platforms, genres=genres)
 
 

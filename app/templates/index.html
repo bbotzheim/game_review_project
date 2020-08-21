@@ -21,7 +21,7 @@
                 <label for="platform">Select a platform:</label>
                 <select name="platform" id="platform">
                     {% for platform in platforms %}
-                    <option value={{platform.id}}>{{platform.name}}</option>
+                    <option value={{platform.id}}>{{platform.name}} ({{platform.num_games}} games)</option>
                     {% endfor %}
                 </select>
             </div>
@@ -29,7 +29,9 @@
                 <label for="genre">Select genres you're interested in</label>
                 <select name="genre" id="genre" multiple>
                     {% for genre in genres %}
-                    <option value={{genre.id}}>{{genre.name}}</option>
+                    <option value={{genre.id}}>{{genre.name}} 
+                        ({{genre.num_games}} {% if genre.num_games != 1 %} games {% else %} game {% endif %})
+                    </option>
                     {% endfor %}
                 </select>
             </div>

@@ -29,13 +29,38 @@ class Recommender(object):
             self.genre_dict[i] = [self.game_genre_tags_df['genre_ID'][j] for j in self.game_genre_tags_df[self.game_genre_tags_df['game_ID']==i].index]
 
     def get_platform_list(self):
-        '''Gets a list of dicts containing platform name and id from the platform data table'''
-        platform_list = [{"name": t.platform, "id": t.platform_ID} for t in self.platform_df.itertuples()]
+        '''Gets a list of dicts containing platform name and id from the platform data table
+        
+        Returns:
+            A list of dicts containing the following entries:
+            - "name": the common name of the platform
+            - "id": The (internal use) ID of the platform
+            - "game_count": The number of games recorded which are for that platform
+        '''
+        platform_list = []
+        for platform_row in self.platform_df.itertuples():
+            platform_id = platform_row.platform_ID
+            num_games = sum(self.games_df["platform_ID"] == platform_id)
+            platform_entry = {"name": platform_row.platform, "id": platform_id, "num_games": num_games}
+            platform_list.append(platform_entry)
         return platform_list
 
     def get_genre_list(self):
-        '''Gets a list of dicts containing genre name and id from the genre data table'''
-        genre_list = [{"name": t.genre_name, "id": t.genre_ID} for t in self.genre_df.itertuples()]
+        '''Gets a list of dicts containing genre name and id from the genre data table
+        
+        Returns:
+            A list of dicts containing the following entries:
+            - "name": the common name of the genre
+            - "id": The (internal use) ID of the genre
+            - "game_count": The number of games recorded which are labelled as that genre
+        '''
+        genre_list = []
+        for genre_row in self.genre_df.itertuples():
+            genre_id = genre_row.genre_ID
+            num_games = sum(self.game_genre_tags_df["genre_ID"] == genre_id)
+            genre_entry = {"name": genre_row.genre_name, "id": genre_id, "num_games": num_games}
+            genre_list.append(genre_entry)
+        # genre_list = [{"name": t.genre_name, "id": t.genre_ID} for t in self.genre_df.itertuples()]
         return genre_list
 
     def create_lookup(self):
