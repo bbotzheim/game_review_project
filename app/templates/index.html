@@ -18,37 +18,47 @@
         </p>
 
         <div class="app">
-            <div class="platform-select">
-                <label for="platform">Select a platform:</label>
-                <br/>
-                <select name="platform" id="platform">
-                    {% for platform in platforms %}
-                    <option value={{platform.id}}>{{platform.name}} ({{platform.num_games}} games)</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="genre-select">
-                <label for="genre">Select genres you're interested in</label>
-                <br/>
-                <select name="genre" id="genre" multiple>
-                    {% for genre in genres %}
-                    <option value={{genre.id}}>{{genre.name}} 
-                        ({{genre.num_games}} {% if genre.num_games != 1 %} games {% else %} game {% endif %})
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div>
-                <label for="game_input">Enter a game you want recommendations similar to</label>
-                <br/>
-                <div class="autocomplete" style="width:300px;">
-                    <input name="game_input" id="game_input" type="text"/>
+            <div class="app-inner">
+                <div class="platform-select input-category">
+                    <label for="platform">Select a platform:</label>
+                    <br/>
+                    <select name="platform" id="platform">
+                        {% for platform in platforms %}
+                        <option value={{platform.id}}>{{platform.name}} 
+                            <span class="game-count">({{platform.num_games}} games)</span>
+                        </option>
+                        {% endfor %}
+                    </select>
                 </div>
-            </div>
-            <button class="submit" type="button">Recommend Me!</button>
+                <div class="genre-select input-category">
+                    <label for="genre">Select genres you're interested in</label>
+                    <br/>
+                    <select name="genre" id="genre" multiple>
+                        {% for genre in genres %}
+                        <option value={{genre.id}}>{{genre.name}} 
+                            <span class="game-count">
+                                ({{genre.num_games}} {% if genre.num_games != 1 %} games{% else %} game{% endif %})
+                            </span>
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="game-select input-category">
+                    <label for="game_input input-category">Enter a game you want recommendations similar to</label>
+                    <br/>
+                    <div class="autocomplete" style="width:300px;" size="8">
+                        <input name="game_input" id="game_input" type="text"/>
+                    </div>
+                </div>
+                
+                <div class="query-submit input-category">
+                    <button class="submit" type="button">Recommend Me!</button>
 
-            <div class="results">
+                </div>
 
+                <div class="results">
+
+                </div>
             </div>
         </div>
     </section>
